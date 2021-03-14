@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import User
-from .models import Social_accounts
+from .models import SocialAccounts
 
+# ------------------ data -------------------------------
 # this is default format of data
 default_data=data={
 	'user_name':'Guest',
@@ -20,20 +21,25 @@ data={
 	'password_is_correct':True,
 }
 
+# ----------------------------FUNCTION'S-------------
+
 # this function validate the password
 def valid_password(password):
 	return True
 
-# Create your views here.
+# ----------------- URL functions---------------
+# home page url -- ''
 def home(request):
 	global data
 	print(data['status'])
 	if data['status']:
-		# u=list(Social_accounts.objects.filter(user_name=data['user_name']))
-		# print(u)
-		pass
+		print("User is avaliable")
+		u=User.objects.get(user_name=data['user_name'])
+		print(u.socialaccounts_set.all())
+
 	return render(request,'home/home.html',data)
 
+# log_in url -- '/log_in/'
 def log_in(request):
 	global data
 	print("Log in")

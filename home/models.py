@@ -10,7 +10,7 @@ class User(models.Model):
 	def check_password(self,p):
 		return p==self.password
 
-class Social_accounts(models.Model):
+class SocialAccounts(models.Model):
 	user_name=models.ForeignKey(User,on_delete=models.CASCADE)
 	website_name = models.CharField(max_length=50)
 	profile_url = models.URLField(max_length=200)
