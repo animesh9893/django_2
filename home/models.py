@@ -17,3 +17,18 @@ class SocialAccounts(models.Model):
 
 	def __str__(self):
 		return self.website_name
+
+class Carousel(models.Model):
+	name = models.CharField(max_length=200)
+	creation_time = models.DateTimeField(auto_now_add=True)
+	valid_day = models.IntegerField() 
+	photo = models.ImageField()
+	display = models.BooleanField(default=True)
+	def __str__(self):
+		return self.name
+	def get_img(self):
+		return str(self.photo)
+	@property
+	def photo_url(self):
+		if self.photo and hasattr(self.photo,'url'):
+			return self.photo.url

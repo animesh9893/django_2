@@ -1,21 +1,24 @@
 {% load static %}
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
+<!--   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
+  </ol> -->
   <div class="carousel-inner">
+
+    {% for photo in carousel_url %}
+    {% if forloop.first %}
     <div class="carousel-item active">
-      <img class="d-block w-100" src="{% static 'home/demo_carousel_1.jpeg' %}" alt="First slide">
+      <img class="d-block w-100" src="static/home/{{photo}}" alt="">
     </div>
+    {% else %}
     <div class="carousel-item">
-      <img class="d-block w-100" src="{% static 'home/demo_carousel_2.jpeg' %}" alt="Second slide">
+      <img class="d-block w-100" src="static/home/{{photo}}" alt="">
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{% static 'home/demo_carousel_3.jpeg' %}" alt="Third slide">
-    </div>
+    {% endif %}
+    {% endfor %}
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

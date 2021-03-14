@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import User
 from .models import SocialAccounts
+from .models import Carousel
+from django.utils import timezone
+
 
 # ------------------ data -------------------------------
 # this is default format of data
@@ -9,7 +12,9 @@ default_data=data={
 	'password':None,
 	'status':False,
 	'user_name_exist':True,
-	'password_is_correct':True
+	'password_is_correct':True,
+	'carousel_status':False,
+	'carousel_obj':[],
 }
 
 # this is real type of data
@@ -19,6 +24,8 @@ data={
 	'status':False,
 	'user_name_exist':True,
 	'password_is_correct':True,
+	'carousel_status':False,
+	'carousel_obj':[],
 }
 
 # ----------------------------FUNCTION'S-------------
@@ -33,10 +40,16 @@ def home(request):
 	global data
 	print(data['status'])
 	if data['status']:
-		print("User is avaliable")
+		# print("User is avaliable")
 		u=User.objects.get(user_name=data['user_name'])
+		print("Social Account : ",end="")
 		print(u.socialaccounts_set.all())
-
+	if data['carousel_status']==False:
+		carousel_obj=list(Carousel.objects.all())
+		for obj in carousel_obj:
+			if obj.display==True:
+				data['carousel_obj'].append(obj)
+	print(data['carousel_obj'])
 	return render(request,'home/home.html',data)
 
 # log_in url -- '/log_in/'
